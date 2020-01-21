@@ -1,5 +1,7 @@
 {
   "name": "Amz",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
