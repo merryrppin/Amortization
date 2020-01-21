@@ -1,7 +1,0 @@
-{
-  "name": "Amz",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
