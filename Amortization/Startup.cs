@@ -38,9 +38,8 @@ namespace Amortization
             else
             {
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
-
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

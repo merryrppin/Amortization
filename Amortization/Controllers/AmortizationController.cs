@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Amortization.Core;
 using Amortization.Entities;
-using Microsoft.AspNetCore.Http;
+using Amortization.EnumTypes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amortization.Controllers
@@ -17,9 +16,9 @@ namespace Amortization.Controllers
 
         // GET: api/Amortization
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<AmortizationTypesValues> Get()
         {
-            return new string[] { "value1", "value2" };
+            return InitializeTypes.AmortizationTypesValuesList;
         }
 
         // GET: api/Amortization/5
@@ -33,7 +32,7 @@ namespace Amortization.Controllers
         [HttpPost]
         public string Post([FromBody] AmortizationCls amortization)
         {
-            return _amortizationCalculation.FrenchAmortization(amortization);
+            return _amortizationCalculation.CalculateAmortization(amortization);
         }
 
         // PUT: api/Amortization/5

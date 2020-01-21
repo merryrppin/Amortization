@@ -1,4 +1,5 @@
 ﻿using Amortization.Entities;
+using Amortization.EnumTypes;
 using System;
 
 namespace Amortization.Core
@@ -10,6 +11,23 @@ namespace Amortization.Core
         {
             feeCalculation = new FeeCalculation();
         }
+
+        public string CalculateAmortization(AmortizationCls amortizationInput)
+        {
+            string valueResult = null;
+            try
+            {
+                switch (amortizationInput.AmortizationType)
+                {
+                    case (int)AmortizationTypes.FrenchType:
+                        valueResult = FrenchAmortization(amortizationInput);
+                        break;
+                }
+                return valueResult;
+            }
+            catch (Exception) { throw; }
+        }
+
         public string FrenchAmortization(AmortizationCls amortizationInput)
         {
             AmortizationCls amortization = new AmortizationCls
