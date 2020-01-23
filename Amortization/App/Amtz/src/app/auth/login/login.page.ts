@@ -21,4 +21,8 @@ export class LoginPage implements OnInit {
     //   this.router.navigateByUrl('home');
     // };
   }
+
+  facebookLogin(): Promise<any> {
+    return this.authService.facebookLogin();
+  }
 }
