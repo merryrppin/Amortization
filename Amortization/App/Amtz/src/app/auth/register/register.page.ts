@@ -17,6 +17,9 @@ export class RegisterPage implements OnInit {
   register(form) {
      this.authService.doRegister(form.value).then((res) => {
        console.log(res);
+     }).catch((err)=>{
+       console.error(err.code);
+       console.error(err.message);
      });
   }
 

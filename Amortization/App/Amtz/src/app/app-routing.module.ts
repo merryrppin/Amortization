@@ -1,6 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AngularFireModule } from 'angularfire2';// for AngularFireDatabase
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';// for AngularFireAuth
+import { AngularFireDatabase } from 'angularfire2/database';// for AngularFireAuth
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import { environment } from '../environments/environment';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
@@ -16,7 +25,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    AngularFireModule.initializeApp(         //////main module
+      environment.firebase
+    ),                                       
+    AngularFireDatabaseModule,                ////// for database 
+    AngularFireAuthModule                     ////// for auth
   ],
   exports: [RouterModule]
 })
