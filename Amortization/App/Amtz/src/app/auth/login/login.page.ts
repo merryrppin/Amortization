@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from  "@angular/router";
 import { AuthService } from '../auth.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -24,5 +25,9 @@ export class LoginPage implements OnInit {
 
   facebookLogin(): Promise<any> {
     return this.authService.facebookLogin();
+  }
+
+  gmailLogin(): Promise<any> {
+    return this.authService.googleLogin();
   }
 }

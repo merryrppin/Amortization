@@ -2,8 +2,14 @@ ion-item{
     --background: #3880ff;
     --color: #fff;
 }
-ion-button{
+ion-button.normal{
+    --background: #008035;
+}
+ion-button.face{
     --background: #062f77;
+}
+ion-button.google{
+    --background: #c71239;
 }
 a{
     color: #fff;

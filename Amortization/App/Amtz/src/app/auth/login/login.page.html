@@ -15,10 +15,13 @@
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" class="normal" expand="block">Login</ion-button>
           </div>
           <div padding>
-            <ion-button size="large" (click)="facebookLogin()" type="button" expand="block">FACEBOOK</ion-button>
+            <ion-button size="large" (click)="facebookLogin()" type="button" class="face" expand="block">FACEBOOK</ion-button>
+          </div>
+          <div padding>
+            <ion-button size="large" (click)="gmailLogin()" type="button" class="google" expand="block">GOOGLE</ion-button>
           </div>
         </ion-col>
       </ion-row>
