@@ -17,7 +17,7 @@ namespace Amortization.Core
             string valueResult = null;
             try
             {
-                switch (amortizationInput.AmortizationType)
+                switch (amortizationInput.AmortizationTypesValues.AmortizationType)
                 {
                     case (int)AmortizationTypes.FrenchType:
                         valueResult = FrenchAmortization(amortizationInput);
