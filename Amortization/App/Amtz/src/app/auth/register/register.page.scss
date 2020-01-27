@@ -1,8 +1,13 @@
 ion-item{
-    --background: #3880ff;
+    --background: #7d93a6;
     --color: #fff;
 }
 
 ion-button{
-    --background: #062f77;
+    --background: #008035;
+    font-size: small;
+}
+ion-content {
+    --ion-background-color: #7d93a6 ;
+    font-size: small;
 }
