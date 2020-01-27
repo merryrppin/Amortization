@@ -5,7 +5,7 @@
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <br/><br/><br/><br/>
           <div text-center >
-            <h3>Login</h3>
+            <h3 style="color:white;">Login</h3>
           </div>
           <div padding>
             <ion-item>
@@ -22,23 +22,26 @@
             <ion-button size="large" type="submit" [disabled]="form.invalid" class="normal" expand="block"><span>Login</span></ion-button>
           </div>
           <div >
-            <ion-button size="large" (click)="facebookLogin()" type="button" class="face" expand="block">Login with Facebook</ion-button>
-          </div>
-          <div >
-            <ion-button size="large" (click)="gmailLogin()" type="button" class="google" expand="block">Login with Google</ion-button>
+            <ion-item class="buttons">
+            <!-- <ion-button size="large" (click)="facebookLogin()" type="button" class="face" expand="block">Login with Facebook</ion-button> -->
+            <ion-avatar ><ion-img src="../../../assets/images/facebook.png" style="width: 32px;height:32px ;" class="left-img" (click)="facebookLogin()"></ion-img></ion-avatar>
+            
+<!--           </div>
+          <div > -->
+            <!-- <ion-button size="large" (click)="gmailLogin()" type="button" class="google" expand="block">Login with Google</ion-button> -->
+            <ion-avatar><ion-img src="../../../assets/images/google.png" style="width: 32px;height:32px ;" class="right-img" (click)="gmailLogin()"></ion-img></ion-avatar>
+            
+            </ion-item>
+
           </div>
         </ion-col>
       </ion-row>
-      <ion-row >        
-    </ion-row>
     </ion-grid>
+    <div class="or" style="margin-top:20%;" padding>
+      <span class="span"><b>NEED AN ACCOUNT?</b></span> 
+    </div>
+    <div class="or">
+      <ion-button><a routerLink='/register'>Sign Up Now</a></ion-button>
+    </div>
   </form>
 </ion-content>
-<ion-footer style="background-color: #7d93a6;">
-  <div class="or" padding>
-    <span class="span"><b>NEED AN ACCOUNT?</b></span> 
-  </div>
-  <div class="or">
-    <ion-button><a routerLink='/register'>Sign Up Now</a></ion-button>
-  </div>
-</ion-footer>

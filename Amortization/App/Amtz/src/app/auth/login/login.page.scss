@@ -1,5 +1,5 @@
 ion-item{
-    --background: #7d93a6;
+    --background: #4b4b4b;
     --color: #fff;
 }
 ion-button.normal{
@@ -19,17 +19,38 @@ a{
     color: #fff;
 }
 ion-content {
-    --ion-background-color: #7d93a6 ;
+    --ion-background-color: #4b4b4b ;
     font-size: small;
 }
 span.span{
     text-align: center;
+    color:white;
     
 }
 div.or{
     text-align: center;
 }
 ion-footer {
-    --ion-background-color: #7d93a6 ;
+    --ion-background-color: #4b4b4b ;
     font-size: small;
+}
+ion-item.buttons{
+    align-content: center;
+}
+.left-img{
+    position:absolute;
+    left: 0;
+    right: 30%;
+    margin:0 auto;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.right-img{
+    position:absolute;
+    left: 30%;
+    right: 0;
+    margin:0 auto;
+    top:50%;
+    transform:translateY(-50%);
 }
