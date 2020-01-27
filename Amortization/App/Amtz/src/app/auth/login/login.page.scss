@@ -1,16 +1,35 @@
 ion-item{
-    --background: #3880ff;
+    --background: #7d93a6;
     --color: #fff;
 }
 ion-button.normal{
     --background: #008035;
+    font-size: small;
+    color: #fff;
 }
 ion-button.face{
     --background: #062f77;
+    font-size: small;
 }
 ion-button.google{
     --background: #c71239;
+    font-size: small;
 }
 a{
     color: #fff;
+}
+ion-content {
+    --ion-background-color: #7d93a6 ;
+    font-size: small;
+}
+span.span{
+    text-align: center;
+    
+}
+div.or{
+    text-align: center;
+}
+ion-footer {
+    --ion-background-color: #7d93a6 ;
+    font-size: small;
 }

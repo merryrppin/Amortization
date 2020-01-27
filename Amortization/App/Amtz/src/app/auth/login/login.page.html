@@ -1,9 +1,10 @@
-<ion-content color="primary" padding>
-  <form #form="ngForm" (ngSubmit)="login(form)">
-    <ion-grid>
+<ion-content class="content"  padding>
+  <form #form="ngForm" (ngSubmit)="login(form)" >
+    <ion-grid >
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
+          <br/><br/><br/><br/>
+          <div text-center >
             <h3>Login</h3>
           </div>
           <div padding>
@@ -14,23 +15,30 @@
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
             </ion-item>
           </div>
-          <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" class="normal" expand="block">Login</ion-button>
+          <div class="or" padding>
+            <span class="span"><b>OR</b></span>
           </div>
-          <div padding>
-            <ion-button size="large" (click)="facebookLogin()" type="button" class="face" expand="block">FACEBOOK</ion-button>
+          <div >
+            <ion-button size="large" type="submit" [disabled]="form.invalid" class="normal" expand="block"><span>Login</span></ion-button>
           </div>
-          <div padding>
-            <ion-button size="large" (click)="gmailLogin()" type="button" class="google" expand="block">GOOGLE</ion-button>
+          <div >
+            <ion-button size="large" (click)="facebookLogin()" type="button" class="face" expand="block">Login with Facebook</ion-button>
+          </div>
+          <div >
+            <ion-button size="large" (click)="gmailLogin()" type="button" class="google" expand="block">Login with Google</ion-button>
           </div>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <div text-center>
-      If you don't have an account, please <a routerLink='/register'>
-        register</a> first!
-        </div>
+      <ion-row >        
     </ion-row>
     </ion-grid>
   </form>
 </ion-content>
+<ion-footer style="background-color: #7d93a6;">
+  <div class="or" padding>
+    <span class="span"><b>NEED AN ACCOUNT?</b></span> 
+  </div>
+  <div class="or">
+    <ion-button><a routerLink='/register'>Sign Up Now</a></ion-button>
+  </div>
+</ion-footer>
