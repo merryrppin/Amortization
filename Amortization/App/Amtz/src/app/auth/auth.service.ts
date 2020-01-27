@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { AndroidClientId } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -44,23 +45,23 @@ export class AuthService {
 
 
   async googleLogin(): Promise<any> {
+    debugger;
     let params;
     // if (this.platform.is('android')) {
-    //   params = {
-    //     'webClientId': '124018728460-sv8cqhnnmnf0jeqbnd0apqbnu6egkhug.apps.googleusercontent.com',
-    //     'offline': true
-    //   }
+      params = {
+        'webClientId': AndroidClientId,
+        'offline': true
+      }
     // }
     // else {
     //   params = {}
     // }
     return this.google.login(params)
       .then((response) => {
-        const { idToken, accessToken } = response
+        const { idToken, accessToken } = response;
         this.onLoginSuccess(idToken, accessToken);
       }).catch((error) => {
-        console.log(error)
-        alert('error:' + JSON.stringify(error))
+        console.log(error);
       });
   }
   onLoginSuccess(accessToken, accessSecret) {

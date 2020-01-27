@@ -1,5 +1,5 @@
 {
-  "name": "Amtz",
+  "name": "amtz",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -86,7 +86,7 @@
         "FACEBOOK_ANDROID_SDK_VERSION": "5.5.2"
       },
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "522176510146-7ekc2vehu6fon8rgn3f6m7ce8msi4dmi.apps.googleusercontent.com",
+        "WEB_APPLICATION_CLIENT_ID": "522176510146-7ekc2vehu6fon8rgn3f6m7ce8msi4dmi.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
       }
     },

@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const URlApi: string = "http://localhost:50070/api";
-
+export const AndroidClientId: string = "F6:77:58:BF:FF:C7:82:F2:45:B5:DF:3C:19:E2:DC:AF:5B:B6:EC:8D";
 export const environment = {
   production: false,
   firebase: {
