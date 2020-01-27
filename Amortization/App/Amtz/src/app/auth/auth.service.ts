@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { AndroidClientId } from "src/environments/environment";
+import { WebClientId } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +32,23 @@ export class AuthService {
   async facebookLogin(): Promise<any> {
     return this.facebook.login(['email'])
       .then(response => {
+        debugger;
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
 
         firebase.auth().signInWithCredential(facebookCredential)
           .then(success => {
+            debugger;
             console.log("Firebase success: " + JSON.stringify(success));
+          }).catch(error => {
+            debugger;
+            console.log(error);
           });
 
-      }).catch((error) => { console.log(error) });
+      }).catch((error) => { 
+        debugger;
+        console.log(error) 
+      });
   }
 
 
@@ -49,7 +57,7 @@ export class AuthService {
     let params;
     // if (this.platform.is('android')) {
       params = {
-        'webClientId': AndroidClientId,
+        // 'webClientId': WebClientId,
         'offline': true
       }
     // }
@@ -58,13 +66,16 @@ export class AuthService {
     // }
     return this.google.login(params)
       .then((response) => {
+        debugger;
         const { idToken, accessToken } = response;
         this.onLoginSuccess(idToken, accessToken);
       }).catch((error) => {
+        debugger;
         console.log(error);
       });
   }
-  onLoginSuccess(accessToken, accessSecret) {
+  onLoginSuccess(accessToken :string, accessSecret :string) {
+    debugger;
     const credential = accessSecret ? firebase.auth.GoogleAuthProvider
       .credential(accessToken, accessSecret) : firebase.auth.GoogleAuthProvider
         .credential(accessToken);
