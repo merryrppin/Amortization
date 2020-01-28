@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from  "@angular/router";
 import { AuthService } from '../auth.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
+import { MessagesService } from 'src/app/core/general/messages.service';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +10,24 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private  authService:  AuthService, private  router:  Router) { }
+  constructor(private authService: AuthService, private navCtrl: NavController, private messagesService: MessagesService) { }
 
   ngOnInit() {
+    this.validateCurrentLogin();
   }
 
-  login(form){
-    // this.authService.login(form.value).subscribe((res)=>{
-    // });
-    // this.authService.login(form.value){
-    //   this.router.navigateByUrl('home');
-    // };
+  validateCurrentLogin() {
+    if (this.authService.validateCurrentLogin()) {
+      this.navCtrl.navigateRoot(["/home"]);
+    }
+  }
+
+  async login(form) {
+    var loginPromise = this.authService.loginUser(form.value).then(res => {
+      this.validateCurrentLogin();
+    }).catch(err => {
+      this.messagesService.showErrorMessage(err);
+    });
   }
 
   facebookLogin(): Promise<any> {
