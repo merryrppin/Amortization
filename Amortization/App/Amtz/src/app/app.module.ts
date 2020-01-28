@@ -15,13 +15,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { environment } from '../environments/environment';
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule],
+    AngularFireAuthModule,BrowserModule,
+    HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen, 
