@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar text-center>
+    <ion-title>{{modalTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="logForm()">    
+
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input placeholder="Nombre de la amortización" name="amortizationName" type="text" [(ngModel)]="amortizationObj.AmortizationName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Deuda total</ion-label>
+      <ion-input placeholder="Valor total de la amortización" name="totalDebt" type="number" [(ngModel)]="amortizationObj.TotalDebt"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Intereses mensuales</ion-label>
+      <ion-input placeholder="Tasa de interés mensual" name="Interest" type="number" [(ngModel)]="amortizationObj.Interest"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Número de cuotas</ion-label>
+      <ion-input placeholder="Número de cuotas de la amortización" name="NumberOfFee" type="number" [(ngModel)]="amortizationObj.NumberOfFee"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-list-header>Tipos de amortización</ion-list-header>
+    
+      <ion-item>
+        <ion-select [(ngModel)]="amortizationObj.AmortizationType" name="AmortizationType" >
+          <ion-select-option *ngFor="let amortizationTypeValue of listAmortizationTypesValues" value="{{amortizationTypeValue.amortizationType}}">{{amortizationTypeValue.amortizationTypeValue}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Fecha inicial</ion-label>
+      <ion-datetime [(ngModel)]="amortizationObj.InitialDate" name="initialDate" displayFormat="YYYY/MM/DD" placeholder="Fecha inicial del préstamo"></ion-datetime>
+    </ion-item>
+
+    
+    <ion-button (click)="calculateAmortization()" block>Calcular amortización</ion-button>
+    <ion-button (click)="closeModal()" block>Close Modal</ion-button>
+  </form>
+</ion-content>

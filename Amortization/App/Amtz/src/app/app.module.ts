@@ -16,6 +16,9 @@ import { AngularFireModule } from '@angular/fire';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { environment } from '../environments/environment';
 import { HttpClientModule} from "@angular/common/http";
+import { AmortizationPageModule } from './modal/amortization/amortization.module';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { DataService } from './providers/data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +26,10 @@ import { HttpClientModule} from "@angular/common/http";
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,BrowserModule,
-    HttpClientModule],
+    HttpClientModule, AmortizationPageModule,
+    AngularFireDatabaseModule],
   providers: [
+    DataService,
     StatusBar,
     SplashScreen, 
     Facebook,

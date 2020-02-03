@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const URlApi: string = "http://localhost:50070/api";
+export const URlApi: string = "https://amortization.azurewebsites.net/api/";
 export const WebClientId: string = "522176510146-i944273nunj750ev59rc4cho9ltamgvj.apps.googleusercontent.com";
+export const ApiControllers = {
+  AmortizationController: "Amortization"
+}
+export const DatabaseList = {
+  amortization: "amtz"
+}
 export const environment = {
   production: false,
   firebase: {
