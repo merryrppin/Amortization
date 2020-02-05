@@ -11,7 +11,8 @@ import { MessagesService } from '../core/general/messages.service';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private google: GooglePlus, public facebook: Facebook, private fireAuth: AngularFireAuth, private messagesService: MessagesService) { }
+  constructor(public afAuth: AngularFireAuth, private google: GooglePlus, public facebook: Facebook, 
+    private fireAuth: AngularFireAuth, private messagesService: MessagesService) { }
 
   async loginUser(value) {
     return new Promise<any>((resolve, reject) => {

@@ -7,6 +7,9 @@ export const WebClientId: string = "522176510146-i944273nunj750ev59rc4cho9ltamgv
 export const ApiControllers = {
   AmortizationController: "Amortization"
 }
+export const DataBaseCollections = {
+  amortizations: "amortizations"
+}
 export const DatabaseList = {
   amortization: "amtz"
 }

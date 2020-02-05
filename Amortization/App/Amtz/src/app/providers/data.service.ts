@@ -1,45 +1,61 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { firestore } from 'firebase';
+import * as firebase from 'firebase/app';
+import { DataBaseCollections } from "src/environments/environment";
+import { AmortizationCls } from '../data/models/AmortizationCls';
+import { AngularFireDatabase, AngularFireList, PathReference } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private db: AngularFireDatabase) { }
- 
-  getFiles() {
-    let ref = this.db.list('files');
- 
-    // return ref.snapshotChanges().map(changes => {
-    //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    // });
+  public listAmortization: Array<AmortizationCls>;
+  public amortizationsListRef: PathReference;
+  constructor(private afs: AngularFirestore, private afd: AngularFireDatabase, ) {
+    this.amortizationsListRef = firebase.database().ref(DataBaseCollections.amortizations);
   }
- 
-  uploadToStorage(information) {
-    let newName = `${new Date().getTime()}.txt`;
-    
-    // return this.afStorage.ref(`files/${newName}`).putString(information);
+
+  // addObject(collectionStr: string, objectToInsert: any) {
+  //   return new Promise<any>((resolve, reject) => {
+  //     this.afs.collection(collectionStr).add(JSON.parse(JSON.stringify(objectToInsert)))
+  //       .then(
+  //         (res) => {
+  //           resolve(res)
+  //         },
+  //         err => reject(err)
+  //       )
+  //   })
+  // }
+
+  addObject(objectToInsert: any, userId: string) {
+    debugger;
+    return new Promise<any>((resolve, reject) => {
+      this.afd.list(this.amortizationsListRef, ref => {
+        return ref.equalTo(userId, 'UserId');
+      }).push(objectToInsert)
+      // .then(
+      //           (res) => {
+      //             resolve(res)
+      //           },
+      //           err => reject(err)
+      //         )
+    })
   }
- 
-  storeInfoToDatabase(metainfo) {
-    let toSave = {
-      created: metainfo.timeCreated,
-      url: metainfo.downloadURLs[0],
-      fullPath: metainfo.fullPath,
-      contentType: metainfo.contentType
-    }
-    return this.db.list('files').push(toSave);
-  }
- 
- 
-  deleteFile(file) {
-    let key = file.key;
-    let storagePath = file.fullPath;
- 
-    let ref = this.db.list('files');
- 
-    ref.remove(key);
-    // return this.afStorage.ref(storagePath).delete();
+
+  getListAmortizations(collectionStr: string, userId: string) {
+    debugger;
+    return new Promise<any>((resolve, reject) => {
+      this.afd.list(this.amortizationsListRef, ref => {
+        return ref.equalTo(userId, 'UserId').orderByChild('Order')
+      }).valueChanges().toPromise().then(
+        (res) => {
+          debugger;
+          resolve(res)
+        },
+        err => reject(err)
+      );
+    })
   }
 }

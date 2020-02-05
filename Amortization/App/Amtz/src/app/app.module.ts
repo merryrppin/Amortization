@@ -19,6 +19,7 @@ import { HttpClientModule} from "@angular/common/http";
 import { AmortizationPageModule } from './modal/amortization/amortization.module';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DataService } from './providers/data.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { DataService } from './providers/data.service';
     SplashScreen, 
     Facebook,
     GooglePlus,
+    AngularFirestore,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

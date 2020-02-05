@@ -9,6 +9,9 @@ import { AmortizationTypesValues } from '../data/models/AmortizationTypesValues'
 import { AmortizationPage } from '../modal/amortization/amortization.page';
 import { URlApi } from "src/environments/environment";
 import { ApiControllers } from "src/environments/environment";
+import { DataBaseCollections } from "src/environments/environment";
+import * as firebase from 'firebase/app';
+import { DataService } from 'src/app/providers/data.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +24,8 @@ export class HomePage {
   public listAmortizationTypesValues: Array<AmortizationTypesValues>;
   
   constructor(private authService: AuthService, private navCtrl: NavController, private http: HttpClient,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController, private dataService: DataService) {
+      this.listAmortization = new Array<AmortizationCls>();
   }
   ngOnInit() {
     if (!this.authService.validateCurrentLogin()) {
@@ -33,14 +37,21 @@ export class HomePage {
   }
 
   async loadListAmortization() {
-    this.listAmortization = new Array<AmortizationCls>();
+    debugger;
+    var addObjectPromise = this.dataService.getListAmortizations(DataBaseCollections.amortizations,firebase.auth().currentUser.uid).then(res => {
+      debugger;
+      this.listAmortization = res;
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+
   }
  
   async loadAmortizationTypesValues(){
       this.http.get(URlApi + ApiControllers.AmortizationController).subscribe(
         (data:Array<AmortizationTypesValues>) => { // Success
           this.listAmortizationTypesValues = data;
-          console.log(this.listAmortizationTypesValues);
         },
         (error) =>{
           console.error(error);
