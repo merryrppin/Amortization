@@ -38,11 +38,12 @@ export class HomePage {
 
   async loadListAmortization() {
     debugger;
-    var addObjectPromise = this.dataService.getListAmortizations(DataBaseCollections.amortizations,firebase.auth().currentUser.uid).then(res => {
+    var addObjectPromise = this.dataService.getListAmortizations().then(res => {
       debugger;
       this.listAmortization = res;
       console.log(res);
     }).catch(err => {
+      debugger;
       console.log(err);
     });
 

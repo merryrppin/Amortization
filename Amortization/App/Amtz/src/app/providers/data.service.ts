@@ -14,7 +14,7 @@ export class DataService {
   public listAmortization: Array<AmortizationCls>;
   public amortizationsListRef: PathReference;
   constructor(private afs: AngularFirestore, private afd: AngularFireDatabase, ) {
-    this.amortizationsListRef = firebase.database().ref(DataBaseCollections.amortizations);
+    this.amortizationsListRef = firebase.database().ref(DataBaseCollections.amortizations + "/" + firebase.auth().currentUser.uid);
   }
 
   // addObject(collectionStr: string, objectToInsert: any) {
@@ -30,26 +30,24 @@ export class DataService {
   // }
 
   addObject(objectToInsert: any, userId: string) {
-    debugger;
     return new Promise<any>((resolve, reject) => {
       this.afd.list(this.amortizationsListRef, ref => {
         return ref.equalTo(userId, 'UserId');
       }).push(objectToInsert)
-      // .then(
-      //           (res) => {
-      //             resolve(res)
-      //           },
-      //           err => reject(err)
-      //         )
+        .then(
+          (res) => {
+            resolve(res)
+          },
+          err => reject(err)
+        )
     })
   }
 
-  getListAmortizations(collectionStr: string, userId: string) {
-    debugger;
+  getListAmortizations() {
     return new Promise<any>((resolve, reject) => {
-      this.afd.list(this.amortizationsListRef, ref => {
-        return ref.equalTo(userId, 'UserId').orderByChild('Order')
-      }).valueChanges().toPromise().then(
+      this.afd.list(this.amortizationsListRef, ref => ref.orderByChild('Order'))
+      .valueChanges().toPromise()
+      .then(
         (res) => {
           debugger;
           resolve(res)
