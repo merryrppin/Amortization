@@ -12,6 +12,7 @@ import { ApiControllers } from "src/environments/environment";
 import { DataBaseCollections } from "src/environments/environment";
 import * as firebase from 'firebase/app';
 import { DataService } from 'src/app/providers/data.service';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ import { DataService } from 'src/app/providers/data.service';
 })
 export class HomePage {
 
-  public listAmortization: Array<AmortizationCls>;
+  public listAmortization: Array<AmortizationCls>;//AmortizationCls
   public listAmortizationTypesValues: Array<AmortizationTypesValues>;
   
   constructor(private authService: AuthService, private navCtrl: NavController, private http: HttpClient,
@@ -37,16 +38,12 @@ export class HomePage {
   }
 
   async loadListAmortization() {
-    debugger;
-    var addObjectPromise = this.dataService.getListAmortizations().then(res => {
-      debugger;
-      this.listAmortization = res;
-      console.log(res);
-    }).catch(err => {
-      debugger;
-      console.log(err);
+    this.dataService.getListAmortizations().subscribe((res) => {
+      res.forEach((result) => {
+        this.listAmortization.push(<AmortizationCls>result.payload.toJSON())
+      });
+      console.log(this.listAmortization);
     });
-
   }
  
   async loadAmortizationTypesValues(){

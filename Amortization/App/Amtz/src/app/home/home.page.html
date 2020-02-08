@@ -16,7 +16,7 @@
       <ion-row>
         <ion-col *ngFor="let amortization of listAmortization">
           <div>
-            amortization
+            {{amortization.AmortizationName}}
           </div>
         </ion-col>
       </ion-row>
@@ -28,8 +28,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    listAmortization: {{listAmortization}}
-
   </div>
 </ion-content>

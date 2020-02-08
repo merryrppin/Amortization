@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import * as firebase from 'firebase/app';
 import { DataBaseCollections } from "src/environments/environment";
 import { AmortizationCls } from '../data/models/AmortizationCls';
 import { AngularFireDatabase, AngularFireList, PathReference } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,7 @@ export class DataService {
 
   public listAmortization: Array<AmortizationCls>;
   public amortizationsListRef: PathReference;
-  constructor(private afs: AngularFirestore, private afd: AngularFireDatabase, ) {
+  constructor(private afs: AngularFirestore, private afd: AngularFireDatabase) {
     this.amortizationsListRef = firebase.database().ref(DataBaseCollections.amortizations + "/" + firebase.auth().currentUser.uid);
   }
 
@@ -44,16 +47,6 @@ export class DataService {
   }
 
   getListAmortizations() {
-    return new Promise<any>((resolve, reject) => {
-      this.afd.list(this.amortizationsListRef, ref => ref.orderByChild('Order'))
-      .valueChanges().toPromise()
-      .then(
-        (res) => {
-          debugger;
-          resolve(res)
-        },
-        err => reject(err)
-      );
-    })
+    return this.afd.list(this.amortizationsListRef, ref => ref.orderByChild('Order')).snapshotChanges().pipe();
   }
 }
