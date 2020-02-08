@@ -29,7 +29,7 @@
 
     <ion-list>
       <ion-list-header>Tipos de amortización</ion-list-header>
-      <ion-item>
+      <ion-item class="combolist">
         <ion-select placeholder="Seleccione" [(ngModel)]="amortizationObj.AmortizationType" name="AmortizationType" >
           <ion-select-option *ngFor="let amortizationTypeValue of listAmortizationTypesValues" value="{{amortizationTypeValue.amortizationType}}">{{amortizationTypeValue.amortizationTypeValue}}</ion-select-option>
         </ion-select>

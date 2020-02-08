@@ -49,6 +49,7 @@ export class AmortizationPage implements OnInit {
   }
 
   async calculateAmortization() {
+    var result;
     this.http.post(URlApi + ApiControllers.AmortizationController,
       {
         "TotalDebt": this.amortizationObj.TotalDebt,
@@ -65,7 +66,15 @@ export class AmortizationPage implements OnInit {
           this.amortizationObj.InitialDate = data.InitialDate;
           this.amortizationObj.FinalDate = data.FinalDate;
           this.amortizationObj.FeeValue = data.FeeValue;
-          this.saveAmortizationToFirebase();
+          result = this.saveAmortizationToFirebase();
+          debugger;
+          if(result.__zone_symbol__state === true)
+          {
+            this.closeModal();
+          }
+          else{
+            alert("Ocurrio un inconveniente intente nuevamente.");
+          }
         },
         (error) => {
           console.error(error);
@@ -77,8 +86,10 @@ export class AmortizationPage implements OnInit {
     // var addObjectPromise = this.dataService.addObject("/"+DataBaseCollections.amortizations, this.amortizationObj).then(res => {
     var addObjectPromise = this.dataService.addObject(this.amortizationObj, firebase.auth().currentUser.uid).then(res => {
       console.log(res);
+      return true;
     }).catch(err => {
       console.log(err);
+      return false;
     });
     // this.amortizationObj
   }
