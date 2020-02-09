@@ -71,6 +71,7 @@ export class HomePage {
     console.log(this.listAmortizationId);
     let self = this;
 pdfmake.vfs = pdfFonts.pdfMake.vfs;
+let namedoc = this.listAmortizationId.AmortizationName; 
 var docDefinition = {
 content: [
 {
@@ -78,9 +79,12 @@ columns: [
 {
 },
 [
-{ text: 'BITCOIN', style: 'header' },
-{ text: 'Cryptocurrency Payment System', style: 'sub_header' },
-{ text: 'WEBSITE: https://bitcoin.org/', style: 'url' },
+{ text: 'Amortizacion', style: 'header' },
+{ text: this.listAmortizationId.AmortizationName, style: 'sub_header' },
+{ text: 'WEBSITE: https://aqdlsolutons.azurewebsites.net/', style: 'url' },
+{ text: 'Capital:'+this.listAmortizationId.TotalDebt,style:"url"},
+{ text: 'Cuotas:'+this.listAmortizationId.NumberOfFee,style:"url"},
+{ text: 'total a capital:'+this.listAmortizationId.FeeValue,style:"url"}
 ]
 ]
 }
@@ -106,7 +110,7 @@ pageOrientation: 'portrait'
 pdfmake.createPdf(docDefinition).getBuffer(function (buffer) {
 let utf8 = new Uint8Array(buffer);
 let binaryArray = utf8.buffer;
-self.saveToDevice(binaryArray,"Bitcoin.pdf")
+self.saveToDevice(binaryArray, namedoc+".pdf")
 });
 }
 saveToDevice(data:any,savefile:any){
