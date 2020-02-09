@@ -14,9 +14,11 @@
     
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let amortization of listAmortization">
+        <ion-col  size-lg="1" size-md="2" size-sm="2" size-xs="3" *ngFor="let amortization of listAmortization">
           <div>
-            {{amortization.AmortizationName}}
+            <ion-button class="listAmortization" color="secondary" (click)="loadListAmortizationIdpdf(amortization.AmortizationName)">
+            <span >{{amortization.AmortizationName}}</span>
+          </ion-button>
           </div>
         </ion-col>
       </ion-row>

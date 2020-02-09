@@ -21,6 +21,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DataService } from './providers/data.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -36,7 +38,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     Facebook,
     GooglePlus,
     AngularFirestore,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent]
 })

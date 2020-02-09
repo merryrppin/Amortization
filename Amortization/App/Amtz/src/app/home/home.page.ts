@@ -14,6 +14,11 @@ import * as firebase from 'firebase/app';
 import { DataService } from 'src/app/providers/data.service';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
+import { File } from '@ionic-native/file';
+import * as pdfmake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -23,7 +28,8 @@ export class HomePage {
 
   public listAmortization: Array<AmortizationCls>;//AmortizationCls
   public listAmortizationTypesValues: Array<AmortizationTypesValues>;
-  
+  public listAmortizationId: AmortizationCls;
+  public pdfObj = null;
   constructor(private authService: AuthService, private navCtrl: NavController, private http: HttpClient,
     public modalCtrl: ModalController, private dataService: DataService) {
       this.listAmortization = new Array<AmortizationCls>();
@@ -38,6 +44,7 @@ export class HomePage {
   }
 
   async loadListAmortization() {
+    this.listAmortization = [];
     this.dataService.getListAmortizations().subscribe((res) => {
       res.forEach((result) => {
         this.listAmortization.push(<AmortizationCls>result.payload.toJSON())
@@ -47,6 +54,7 @@ export class HomePage {
   }
  
   async loadAmortizationTypesValues(){
+      this.listAmortizationTypesValues = [];
       this.http.get(URlApi + ApiControllers.AmortizationController).subscribe(
         (data:Array<AmortizationTypesValues>) => { // Success
           this.listAmortizationTypesValues = data;
@@ -55,6 +63,55 @@ export class HomePage {
           console.error(error);
         }
       );
+  }
+
+  async loadListAmortizationIdpdf(name){
+    debugger;
+    this.listAmortizationId=this.listAmortization.find(x=>x.AmortizationName==name);
+    console.log(this.listAmortizationId);
+    let self = this;
+pdfmake.vfs = pdfFonts.pdfMake.vfs;
+var docDefinition = {
+content: [
+{
+columns: [
+{
+},
+[
+{ text: 'BITCOIN', style: 'header' },
+{ text: 'Cryptocurrency Payment System', style: 'sub_header' },
+{ text: 'WEBSITE: https://bitcoin.org/', style: 'url' },
+]
+]
+}
+],
+styles: {
+header: {
+bold: true,
+fontSize: 20,
+alignment: 'right'
+},
+sub_header: {
+fontSize: 18,
+alignment: 'right'
+},
+url: {
+fontSize: 16,
+alignment: 'right'
+}
+},
+pageSize: 'A4',
+pageOrientation: 'portrait'
+};
+pdfmake.createPdf(docDefinition).getBuffer(function (buffer) {
+let utf8 = new Uint8Array(buffer);
+let binaryArray = utf8.buffer;
+self.saveToDevice(binaryArray,"Bitcoin.pdf")
+});
+}
+saveToDevice(data:any,savefile:any){
+let self = File;
+self.writeFile(self.externalDataDirectory, savefile, data, {replace:false});
   }
 
   amortizationReturned:AmortizationCls;
